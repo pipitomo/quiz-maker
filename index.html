@@ -1,105 +1,109 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuizMaker</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMaker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<nav>
-  <div class="nav-inner">
-    <div class="logo" onclick="showPage('list')">
-      <span class="logo-text">問題作成共有メーカー</span>
-    </div>
-    <div id="nav-actions">
-      <button class="btn btn-primary btn-sm" onclick="startNew()">＋ 新規作成</button>
-    </div>
-  </div>
-</nav>
-
-<div id="toast"></div>
-
-<!-- LIST -->
-<div id="page-list" class="page active">
-  <div class="container">
-    <div class="list-header">
-      <div>
-        <h2>保存済みクイズ</h2>
-        <p>クイズIDを友達に共有して挑戦してもらおう</p>
+  <nav>
+    <div class="nav-inner">
+      <div class="logo" onclick="showPage('list')">
+        <span class="logo-text">問題作成共有メーカー</span>
       </div>
-      <button class="btn btn-primary" onclick="startNew()">＋ 新規作成</button>
-    </div>
-    <div id="quiz-list-container"></div>
-  </div>
-  <div class="load-bar">
-    <div class="load-bar-inner">
-      <input type="text" id="load-id-input" placeholder="クイズIDを入力して読み込む" onkeydown="if(event.key==='Enter') loadById()">
-      <button class="btn btn-ghost btn-sm" onclick="loadById()">IDで読み込む</button>
-    </div>
-    <div class="load-error" id="load-error"></div>
-  </div>
-</div>
-
-<!-- EDITOR -->
-<div id="page-editor" class="page">
-  <div class="container">
-    <div class="card">
-      <div class="field">
-        <label>クイズタイトル</label>
-        <input type="text" id="quiz-title" placeholder="例：中学理科 第1章テスト">
-      </div>
-      <div class="field" style="margin-bottom:0">
-        <label>説明（任意）</label>
-        <textarea id="quiz-desc" rows="2" placeholder="このクイズについての説明"></textarea>
+      <div id="nav-actions">
+        <button class="btn btn-primary btn-sm" onclick="startNew()">＋ 新規作成</button>
       </div>
     </div>
-    <div id="questions-container"></div>
-    <button class="add-question-btn" onclick="addQuestion()">＋ 問題を追加</button>
-    <div class="editor-actions">
-      <button class="btn btn-primary btn-lg" onclick="saveQuiz()" id="save-btn">💾 保存する</button>
-      <button class="btn btn-ghost btn-lg" onclick="showPage('list')">キャンセル</button>
-    </div>
-  </div>
-</div>
+  </nav>
 
-<!-- PLAYER -->
-<div id="page-player" class="page">
-  <div class="container">
-    <div class="player-header">
-      <h2 id="player-title"></h2>
-      <p id="player-desc"></p>
-      <div style="margin-top:10px"><span class="badge" id="player-q-count"></span></div>
-    </div>
-    <div id="score-banner" style="display:none"></div>
-    <div id="player-questions"></div>
-    <div class="submit-area" id="submit-area">
-      <button class="btn btn-primary btn-lg" onclick="submitQuiz()">採点する</button>
-    </div>
-  </div>
-</div>
+  <div id="toast"></div>
 
-<!-- SHARE -->
-<div id="page-share" class="page">
-  <div class="container">
-    <div class="card share-card">
-      <div class="share-emoji">🎉</div>
-      <h2>保存しました！</h2>
-      <p>以下のIDを友達に共有するとクイズに挑戦できます</p>
-      <div class="id-box">
-        <span id="share-id-text"></span>
-        <button class="copy-btn" onclick="copyShareId()">コピー</button>
+  <!-- LIST -->
+  <div id="page-list" class="page active">
+    <div class="container">
+      <div class="list-header">
+        <div>
+          <h2>保存済みクイズ</h2>
+          <p>クイズIDを友達に共有して挑戦してもらおう</p>
+        </div>
+        <button class="btn btn-primary" onclick="startNew()">＋ 新規作成</button>
       </div>
-      <p style="font-size:12px">「IDで読み込む」欄にIDを貼り付けて使います</p>
-      <div class="share-actions">
-        <button class="btn btn-success btn-lg" onclick="playCurrentShared()">このクイズに挑戦する</button>
-        <button class="btn btn-ghost btn-lg" onclick="showPage('list')">一覧に戻る</button>
+      <div id="quiz-list-container"></div>
+    </div>
+    <div class="load-bar">
+      <div class="load-bar-inner">
+        <input type="text" id="load-id-input" placeholder="クイズIDを入力して読み込む"
+          onkeydown="if(event.key==='Enter') loadById()">
+        <button class="btn btn-ghost btn-sm" onclick="loadById()">IDで読み込む</button>
+      </div>
+      <div class="load-error" id="load-error"></div>
+    </div>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="page-editor" class="page">
+    <div class="container">
+      <div class="card">
+        <div class="field">
+          <label>クイズタイトル</label>
+          <input type="text" id="quiz-title" placeholder="例：中学理科 第1章テスト">
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>説明（任意）</label>
+          <textarea id="quiz-desc" rows="2" placeholder="このクイズについての説明"></textarea>
+        </div>
+      </div>
+      <div id="questions-container"></div>
+      <button class="add-question-btn" onclick="addQuestion()">＋ 問題を追加</button>
+      <div class="editor-actions">
+        <button class="btn btn-primary btn-lg" onclick="saveQuiz()" id="save-btn">💾 保存する</button>
+        <button class="btn btn-ghost btn-lg" onclick="showPage('list')">キャンセル</button>
       </div>
     </div>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <!-- PLAYER -->
+  <div id="page-player" class="page">
+    <div class="container">
+      <div class="player-header">
+        <h2 id="player-title"></h2>
+        <p id="player-desc"></p>
+        <div style="margin-top:10px"><span class="badge" id="player-q-count"></span></div>
+      </div>
+      <div id="score-banner" style="display:none"></div>
+      <div id="player-questions"></div>
+      <div class="submit-area" id="submit-area">
+        <button class="btn btn-primary btn-lg" onclick="submitQuiz()">採点する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE -->
+  <div id="page-share" class="page">
+    <div class="container">
+      <div class="card share-card">
+        <div class="share-emoji">🎉</div>
+        <h2>保存しました！</h2>
+        <p>以下のIDを友達に共有するとクイズに挑戦できます</p>
+        <div class="id-box">
+          <span id="share-id-text"></span>
+          <button class="copy-btn" onclick="copyShareId()">コピー</button>
+        </div>
+        <p style="font-size:12px">「IDで読み込む」欄にIDを貼り付けて使います</p>
+        <div class="share-actions">
+          <button class="btn btn-success btn-lg" onclick="playCurrentShared()">このクイズに挑戦する</button>
+          <button class="btn btn-ghost btn-lg" onclick="showPage('list')">一覧に戻る</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
