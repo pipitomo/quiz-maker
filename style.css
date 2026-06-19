@@ -1,0 +1,116 @@
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #F0F2FA; --surface: #FFFFFF; --primary: #4F6EF7; --primary-dark: #3451D1;
+    --accent: #FF6B6B; --correct: #22C55E; --wrong: #EF4444;
+    --border: #DDE2F0; --text: #1A1D2E; --muted: #8892A4; --tag-bg: #EEF1FF;
+  }
+  body { font-family: 'Noto Sans JP', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  nav { background: var(--surface); border-bottom: 1.5px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { max-width: 740px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .logo { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .logo-text { font-weight: 900; font-size: 18px; color: var(--text); letter-spacing: -0.5px; }
+
+  .btn { border: none; cursor: pointer; border-radius: 10px; font-weight: 700; font-family: inherit; transition: all .15s; font-size: 14px; padding: 9px 20px; display: inline-flex; align-items: center; gap: 6px; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+  .btn-ghost { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+  .btn-ghost:hover:not(:disabled) { background: var(--tag-bg); }
+  .btn-danger { background: var(--accent); color: #fff; }
+  .btn-success { background: var(--correct); color: #fff; }
+  .btn-success:hover:not(:disabled) { background: #16a34a; }
+  .btn-sm { font-size: 13px; padding: 6px 14px; }
+  .btn-lg { font-size: 16px; padding: 13px 30px; border-radius: 12px; }
+
+  .page { display: none; padding: 28px 20px 100px; }
+  .page.active { display: block; }
+  .container { max-width: 740px; margin: 0 auto; }
+
+  .card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.4px; text-transform: uppercase; }
+  input[type="text"], textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; font-family: inherit; color: var(--text); background: var(--bg); outline: none; transition: border .15s; resize: vertical; }
+  input[type="text"]:focus, textarea:focus { border-color: var(--primary); background: #fff; }
+
+  .badge { display: inline-flex; align-items: center; background: var(--tag-bg); color: var(--primary); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+
+  .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .list-header h2 { font-size: 22px; font-weight: 900; }
+  .list-header p { color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .quiz-item { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+  .quiz-item:hover { border-color: var(--primary); box-shadow: 0 4px 16px rgba(79,110,247,.08); }
+  .quiz-item-title { font-weight: 700; font-size: 16px; }
+  .quiz-item-meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .quiz-item-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty-icon { font-size: 52px; margin-bottom: 14px; }
+
+  .q-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .q-remove { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 20px; padding: 2px 6px; border-radius: 6px; transition: color .15s; }
+  .q-remove:hover { color: var(--accent); }
+  .choices-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .choice-row { display: flex; align-items: center; gap: 10px; }
+  .correct-btn { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--border); background: transparent; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; font-size: 14px; font-weight: 900; }
+  .correct-btn.selected { border-color: var(--correct); background: var(--correct); color: #fff; }
+  .choice-input-wrap { flex: 1; }
+  .choice-remove { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 18px; flex-shrink: 0; padding: 4px; transition: color .15s; }
+  .choice-remove:hover { color: var(--accent); }
+  .add-choice-btn { width: 100%; padding: 10px; border: 1.5px dashed var(--border); border-radius: 10px; background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; font-family: inherit; margin-top: 6px; transition: border-color .15s, color .15s; }
+  .add-choice-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .add-question-btn { width: 100%; padding: 16px; border: 2px dashed var(--border); border-radius: 14px; background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; font-weight: 700; font-family: inherit; margin-bottom: 24px; transition: border-color .15s, color .15s; }
+  .add-question-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .editor-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .player-header { margin-bottom: 28px; }
+  .player-header h2 { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+  .player-header p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .score-banner { border-radius: 16px; padding: 24px; margin-bottom: 28px; border: 2px solid; text-align: center; }
+  .score-banner.perfect { background: #F0FDF4; border-color: var(--correct); }
+  .score-banner.imperfect { background: #FFF1F1; border-color: var(--accent); }
+  .score-number { font-size: 40px; font-weight: 900; }
+  .score-banner.perfect .score-number { color: var(--correct); }
+  .score-banner.imperfect .score-number { color: var(--accent); }
+  .score-label { color: var(--muted); margin-top: 4px; font-size: 14px; }
+  .score-actions { margin-top: 18px; display: flex; gap: 10px; justify-content: center; }
+  .q-block-header { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; }
+  .q-result-ok { color: var(--correct); font-weight: 700; font-size: 14px; }
+  .q-result-ng { color: var(--wrong); font-weight: 700; font-size: 14px; }
+  .q-text { font-size: 16px; line-height: 1.7; white-space: pre-wrap; margin-bottom: 14px; }
+  .choice-option { width: 100%; padding: 13px 16px; border-radius: 10px; border: 2px solid var(--border); background: var(--bg); cursor: pointer; text-align: left; font-size: 15px; font-family: inherit; color: var(--text); margin-bottom: 8px; transition: all .15s; display: flex; align-items: center; gap: 10px; }
+  .choice-option:hover:not(:disabled) { border-color: var(--primary); background: var(--tag-bg); }
+  .choice-option.selected { border-color: var(--primary); background: var(--tag-bg); font-weight: 700; }
+  .choice-option.correct { border-color: var(--correct); background: #F0FDF4; color: #166534; font-weight: 700; }
+  .choice-option.wrong { border-color: var(--wrong); background: #FFF1F1; color: #991B1B; font-weight: 700; }
+  .choice-option:disabled { cursor: default; }
+  .choice-label { color: var(--muted); font-weight: 700; flex-shrink: 0; }
+  .submit-area { margin-top: 20px; }
+
+  .share-card { max-width: 480px; margin: 0 auto; text-align: center; }
+  .share-emoji { font-size: 56px; margin-bottom: 14px; }
+  .share-card h2 { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+  .share-card p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  .id-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 14px 18px; font-size: 15px; font-weight: 700; color: var(--primary); word-break: break-all; margin-bottom: 8px; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .copy-btn { background: var(--tag-bg); border: none; border-radius: 8px; color: var(--primary); font-weight: 700; font-size: 13px; cursor: pointer; padding: 6px 12px; flex-shrink: 0; transition: background .15s; }
+  .copy-btn:hover { background: var(--primary); color: #fff; }
+  .share-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+  .load-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1.5px solid var(--border); padding: 14px 20px; z-index: 50; }
+  .load-bar-inner { max-width: 740px; margin: 0 auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .load-bar-inner input { flex: 1; min-width: 160px; }
+  .load-error { color: var(--wrong); font-size: 12px; margin-top: 4px; max-width: 740px; margin-left: auto; margin-right: auto; }
+
+  #toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: #fff; padding: 10px 20px; border-radius: 99px; font-size: 14px; font-weight: 700; opacity: 0; pointer-events: none; transition: all .25s; z-index: 200; white-space: nowrap; }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .loading-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; z-index: 300; font-size: 16px; font-weight: 700; color: var(--primary); gap: 10px; }
+  .spinner { width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 520px) {
+    .quiz-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .quiz-item-actions { width: 100%; }
+    .quiz-item-actions .btn { flex: 1; justify-content: center; }
+    .editor-actions { flex-direction: column; }
+    .editor-actions .btn { width: 100%; justify-content: center; }
+  }
